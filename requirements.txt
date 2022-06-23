@@ -1,0 +1,6 @@
+chess
+numpy~=1.19.5
+pandas
+tensorflow
+colorama~=0.4.4
+matplotlib~=3.5.2
