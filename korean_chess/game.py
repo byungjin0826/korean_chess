@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 
 # paths = route + destination
@@ -65,11 +66,19 @@ class King(Stone):
 
 
 class Cha(Stone):
-
+    def get_all_moves(self):
+        total = np.array([[[x, y] for x in range(9)] for y in range(10)]).reshape(-1, 2)
+        total_df = pd.DataFrame(total, columns=['X', 'Y'])
+        moves = total_df.loc[((total_df.X == self.position[0]) | (total_df.Y == self.position[1])) &
+                             ~((total_df.X == self.position[0]) & (total_df.Y == self.position[1]))]
+        moves = moves.values - self.position
+        return moves
     pass
 
 
 class Sa(Stone):
+    def get_all_moves(self):
+        pass
     pass
 
 
@@ -100,6 +109,6 @@ def plot_moves(start_position, moves):
 
 
 if __name__ == "__main__":
-    king = King(1, np.array([3, 1]), 1000)
-    # print(king.get_all_moves().T)
-    plot_moves(king.position, king.get_all_moves())
+    cha = Cha(1, [4, 1], 13)
+    plot_moves(cha.position, cha.get_all_moves())
+    pass
